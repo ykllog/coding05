@@ -1,0 +1,2 @@
+// クリッカブルマップ
+imageMapResize();
