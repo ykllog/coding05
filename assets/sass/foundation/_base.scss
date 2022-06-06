@@ -1,0 +1,107 @@
+@use "sass:math";
+
+
+//*------------------*
+//*  color定義
+//*------------------*
+
+$color-default: #2C2C2C;
+$color-white: #fff;
+$color-gray01: #FAFAFA;
+$color-gray02: #9B9B9B;
+$color-gray03: #F7F7F9;
+$color-gray04: #5D5D5D;
+$color-gray05: #FBFBFD;
+$color-gray06: rgba(0, 0, 0, 0.1);
+$color-orange01: #FF5F32;
+$color-orange02: #ebc4c0;
+$color-orange03: #FFECC6;
+
+
+//*------------------*
+//*  font定義
+//*------------------*
+
+//font-family
+$font-main: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', sans-serif;
+
+//font-size
+@function rem($px) {
+  @return ($px / 16) * 1rem;
+}
+
+@mixin font($size: 16, $base: 16) {
+  font-size: math.div($size, 16) + rem;
+  line-height: math.div(round(math.div($base, $size) * 1000), 1000);
+}
+
+@mixin fz($value) {
+  font-size: math.div(round(math.div($value, 16)* 100), 100) + rem;
+}
+
+@mixin lh($value, $base) {
+  line-height: math.div(round(math.div($value, $base) * 1000), 1000);
+}
+
+@mixin ls($value) {
+  letter-spacing: math.div($value, 1000) + em;
+}
+
+
+//*------------------*
+//*  レスポンシブ定義
+//*------------------*
+
+@mixin md-layout($width: 1100px) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin sm-layout($width: 767px) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+
+//*------------------*
+//*  デバイス用定義
+//*------------------*
+
+@mixin ie-layout {
+  @media all and (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+
+//*------------------*
+//*  共通定義
+//*------------------*
+
+body {
+  font-size: rem(14);
+  font-family: $font-main;
+  line-height: 1;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: bottom;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
